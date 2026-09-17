@@ -209,6 +209,13 @@ begin
   SetIniString('SimpleOutput', 'RecRBTime', '90', ProfileIni);
   SetIniString('AdvOut', 'RecRB', 'true', ProfileIni);
   SetIniString('AdvOut', 'RecRBTime', '90', ProfileIni);
+
+  { Spotlight defaults: no setup screen required after install. }
+  SetIniString('143Spotlight', 'AutoStart', 'true', ProfileIni);
+  SetIniString('143Spotlight', 'ReplayLength', '90', ProfileIni);
+  SetIniString('143Spotlight', 'Resolution', 'Native', ProfileIni);
+  SetIniString('143Spotlight', 'FPS', '60', ProfileIni);
+  SetIniString('143Spotlight', 'Quality', 'Balanced', ProfileIni);
 end;
 
 procedure CurStepChanged(CurStep: TSetupStep);
