@@ -42,9 +42,9 @@ QString outputMode(config_t *config)
 const char *replayConfigSection(config_t *config)
 {
 	return outputMode(config).compare(QStringLiteral("Advanced"), Qt::CaseInsensitive) == 0 ? "AdvOut"
-	                                                                                         : "SimpleOutput";
+												: "SimpleOutput";
 }
-}
+} // namespace
 
 ReplayDock::ReplayDock(QWidget *parent) : QWidget(parent)
 {
@@ -100,8 +100,8 @@ void ReplayDock::buildUi()
 	form->setFieldGrowthPolicy(QFormLayout::AllNonFixedFieldsGrow);
 
 	resolutionCombo_ = new QComboBox(this);
-	resolutionCombo_->addItems({QStringLiteral("Native"), QStringLiteral("1440p"), QStringLiteral("1080p"),
-	                            QStringLiteral("720p")});
+	resolutionCombo_->addItems(
+		{QStringLiteral("Native"), QStringLiteral("1440p"), QStringLiteral("1080p"), QStringLiteral("720p")});
 	form->addRow(QStringLiteral("Resolution"), resolutionCombo_);
 
 	fpsCombo_ = new QComboBox(this);
@@ -170,7 +170,8 @@ void ReplayDock::loadUiSettings()
 	const bool replayMode = config_get_bool(config, kSettingsSection, "ReplayMode");
 	const bool autoStart = config_get_bool(config, kSettingsSection, "AutoStart");
 
-	const QString resolutionValue = resolution && *resolution ? QString::fromUtf8(resolution) : QStringLiteral("1080p");
+	const QString resolutionValue = resolution && *resolution ? QString::fromUtf8(resolution)
+								  : QStringLiteral("1080p");
 	const QString fpsValue = fps && *fps ? QString::fromUtf8(fps) : QStringLiteral("60");
 	const QString qualityValue = quality && *quality ? QString::fromUtf8(quality) : QStringLiteral("Balanced");
 
@@ -364,7 +365,7 @@ void ReplayDock::updateStatusText(const QString &message)
 	}
 
 	statusLabel_->setText(obs_frontend_replay_buffer_active() ? QStringLiteral("● Replay Buffer active")
-	                                                         : QStringLiteral("○ Replay Buffer stopped"));
+								  : QStringLiteral("○ Replay Buffer stopped"));
 }
 
 void ReplayDock::updateLastReplay()

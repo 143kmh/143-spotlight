@@ -22,12 +22,15 @@ void frontendEvent(enum obs_frontend_event event, void *)
 	if (!g_dock)
 		return;
 
-	QMetaObject::invokeMethod(g_dock, [event]() {
-		if (g_dock)
-			g_dock->handleFrontendEvent(static_cast<int>(event));
-	}, Qt::QueuedConnection);
+	QMetaObject::invokeMethod(
+		g_dock,
+		[event]() {
+			if (g_dock)
+				g_dock->handleFrontendEvent(static_cast<int>(event));
+		},
+		Qt::QueuedConnection);
 }
-}
+} // namespace
 
 bool obs_module_load(void)
 {
